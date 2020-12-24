@@ -11,6 +11,7 @@ from PIL import Image
 import argparse
 from tensorboardX import SummaryWriter
 from net import feature_net
+import os
 
 # 参数设置
 parser = argparse.ArgumentParser(description='cifar10')
@@ -24,6 +25,8 @@ args = parser.parse_args()
 # 定义使用模型
 model = args.model
 batchsize =args.batch_size
+if not os.path.exists('./model/'):
+    os.makedirs('./model/')
 # 使用gpu
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
