@@ -8,8 +8,8 @@ class feature_net(nn.Module):
 
         if model == 'vgg':
             vgg = models.vgg19(pretrained=True)
-            self.feature = nn.Sequential(*list(vgg.children())[:-1])
-            self.feature.add_module('global average', nn.AvgPool2d(9))
+            self.feature = nn.Sequential(*list(vgg.children())[:-2])
+            # self.feature.add_module('global average', nn.AvgPool2d(9))
         elif model == 'inceptionv3':
             inception = models.inception_v3(pretrained=True)
             self.feature = nn.Sequential(*list(inception.children())[:-1])
@@ -20,7 +20,7 @@ class feature_net(nn.Module):
             self.feature = nn.Sequential(*list(resnet.children())[:-1])
 
         self.classifier = nn.Sequential(
-            nn.Linear(dim, 4096),
+            nn.Linear(25088, 4096),
             nn.ReLU(True),
             nn.Dropout(0.5),
             nn.Linear(4096, 4096),
