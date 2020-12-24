@@ -20,7 +20,7 @@ parser.add_argument('--total_epoch', default=50, help='time for ergodic')
 parser.add_argument('--model', default='vgg', help='model for training')
 parser.add_argument('--outf', default='./model/', help='folder to output images and model checkpoints')  # 输出结果保存路径
 parser.add_argument('--pre_model', default=False, help='use pre-model')  # 恢复训练时的模型路径
-parser.add_argument('--batch_size', default=8,help="batch size")
+parser.add_argument('--batch_size', type=int, default=8, help="batch size")
 args = parser.parse_args()
 # 定义使用模型
 model = args.model
