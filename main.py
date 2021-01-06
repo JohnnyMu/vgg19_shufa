@@ -21,6 +21,8 @@ parser.add_argument('--model', default='vgg', help='model for training')
 parser.add_argument('--outf', default='./model/', help='folder to output images and model checkpoints')  # 输出结果保存路径
 parser.add_argument('--pre_model', default=False, help='use pre-model')  # 恢复训练时的模型路径
 parser.add_argument('--batch_size', type=int, default=8, help="batch size")
+parser.add_argument('--centerCrop', type=int, default=0, help="1 true 0 false")
+
 args = parser.parse_args()
 # 定义使用模型
 model = args.model
@@ -33,10 +35,16 @@ device = torch.device("cuda" if use_cuda else "cpu")
 
 # 图片导入
 path = './shufa/'
-transform = transforms.Compose([transforms.Resize(int(256 * 1.12), Image.BICUBIC),
-                                transforms.CenterCrop(224),
-                                transforms.ToTensor(),
-                                transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
+if args.centerCrop==0:
+    transforms.transforms.Compose([transforms.Resize(224, Image.BICUBIC),
+                                   transforms.ToTensor(),
+                                   transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+                               ])
+else:
+    transform = transforms.Compose([transforms.Resize(int(256 * 1.12), Image.BICUBIC),
+                                    transforms.CenterCrop(224),
+                                    transforms.ToTensor(),
+                                    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
 data_image = {x: datasets.ImageFolder(root=os.path.join(path, x),
                                       transform=transform)
               for x in ["train", "val"]}
