@@ -36,7 +36,7 @@ device = torch.device("cuda" if use_cuda else "cpu")
 # 图片导入
 path = './shufa/'
 if args.centerCrop==0:
-    transforms.transforms.Compose([transforms.Resize(224, Image.BICUBIC),
+    transform = transforms.Compose([transforms.Resize(224, Image.BICUBIC),
                                    transforms.ToTensor(),
                                    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
                                ])
