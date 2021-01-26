@@ -75,7 +75,7 @@ plt.imshow(img)  # mshow能显示数据归一化到0到1的图像
 # plt.show()
 
 # 构建网络
-use_model = feature_net(model, dim=512, n_classes=4)
+use_model = feature_net(model, dim=512, n_classes=2)
 for parma in use_model.feature.parameters():
     parma.requires_grad = False
 
