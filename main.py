@@ -22,6 +22,7 @@ parser.add_argument('--outf', default='./model/', help='folder to output images 
 parser.add_argument('--pre_model', default=False, help='use pre-model')  # 恢复训练时的模型路径
 parser.add_argument('--batch_size', type=int, default=8, help="batch size")
 parser.add_argument('--centerCrop', type=int, default=0, help="1 true 0 false")
+parser.add_argument('--dataset' , default='vgg_liugongquan')
 
 args = parser.parse_args()
 # 定义使用模型
@@ -34,7 +35,7 @@ use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
 
 # 图片导入
-path = './shufa/'
+path = './%s/' % args.dataset
 if args.centerCrop==0:
     transform = transforms.Compose([transforms.Resize(224, Image.BICUBIC),
                                    transforms.ToTensor(),
