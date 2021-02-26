@@ -37,12 +37,12 @@ device = torch.device("cuda" if use_cuda else "cpu")
 # 图片导入
 path = './%s/' % args.dataset
 if args.centerCrop==0:
-    transform = transforms.Compose([transforms.Resize(224, Image.BICUBIC),
+    transform = transforms.Compose([transforms.Resize((224, 224), Image.BICUBIC),
                                    transforms.ToTensor(),
                                    transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
                                ])
 else:
-    transform = transforms.Compose([transforms.Resize(int(256 * 1.12), Image.BICUBIC),
+    transform = transforms.Compose([transforms.Resize((int(256 * 1.12),int(256 * 1.12)), Image.BICUBIC),
                                     transforms.CenterCrop(224),
                                     transforms.ToTensor(),
                                     transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
