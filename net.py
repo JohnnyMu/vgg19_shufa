@@ -3,7 +3,7 @@ import torchvision.models as models
 
 
 class feature_net(nn.Module):
-    def __init__(self, model, dim, n_classes):
+    def __init__(self, model, n_classes):
         super(feature_net, self).__init__()
 
         if model == 'vgg':
